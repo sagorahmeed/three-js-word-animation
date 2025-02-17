@@ -1,9 +1,8 @@
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Three Js Word Animation</title>
+    <title>Three Js Word Animation 2</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -66,10 +65,8 @@ loader.load(typeface, (font) => {
 
         THREE.GeometryUtils.center(texts[idx].geometry);
 
-        // Scale the geometry to make it appear more elongated (wider)
-        texts[idx].geometry.scale(1.4, 1, 1);  // 1.5x the original width, no height or depth change
-
         texts[idx].particles = new THREE.Geometry();
+
         texts[idx].points = THREE.GeometryUtils.randomPointsInGeometry(texts[idx].geometry, particleCount);
 
         createVertices(texts[idx].particles, texts[idx].points);
@@ -77,7 +74,6 @@ loader.load(typeface, (font) => {
         enableTrigger(trigger, idx);
     });
 });
-
 
 for (var p = 0; p < particleCount; p++) {
     var vertex = new THREE.Vector3();
@@ -88,12 +84,18 @@ for (var p = 0; p < particleCount; p++) {
     particles.vertices.push(vertex);
 }
 
-function createVertices(emptyArray, points) {
- for (var p = 0; p < particleCount; p++) {
-     var vertex = new THREE.Vector3();
-     vertex.x = points[p]['x'];
-     vertex.y = points[p]['y'];
-     vertex.z = points[p]['z'];
+ function createVertices(emptyArray, points) {
+     for (var p = 0; p < particleCount; p++) {
+         var vertex = new THREE.Vector3();
+        
+         vertex.x = points[p]['x'];
+         vertex.y = points[p]['y'];
+         vertex.z = points[p]['z'];
+        
+         const offset = 2;
+         vertex.x += Math.random() * offset - offset / 2;
+         vertex.y += Math.random() * offset - offset / 2;
+         vertex.z += Math.random() * offset - offset / 2;
 
          emptyArray.vertices.push(vertex);
      }
