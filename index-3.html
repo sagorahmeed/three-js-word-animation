@@ -53,27 +53,31 @@
     var typeface = 'https://dl.dropboxusercontent.com/s/bkqic142ik0zjed/swiss_black_cond.json?';
     
     loader.load(typeface, (font) => {
-        Array.from(triggers).forEach((trigger, idx) => {
-            texts[idx] = {};
-    
+          Array.from(triggers).forEach((trigger, idx) => {
+            texts[idx] = {}
+
             texts[idx].geometry = new THREE.TextGeometry(trigger.textContent, {
-                font: font,
-                size: window.innerWidth * 0.02,
-                height: 4,
-                curveSegments: 10,
-            });
-    
-            THREE.GeometryUtils.center(texts[idx].geometry);
-    
-            texts[idx].particles = new THREE.Geometry();
-    
-            texts[idx].points = THREE.GeometryUtils.randomPointsInGeometry(texts[idx].geometry, particleCount);
-    
-            createVertices(texts[idx].particles, texts[idx].points);
-    
-            enableTrigger(trigger, idx);
-        });
-    });
+              font: font,
+              size: window.innerWidth * 0.02,
+              height: 4,
+              curveSegments: 10,
+            })
+
+            THREE.GeometryUtils.center(texts[idx].geometry)
+
+            texts[idx].geometry.scale(1.6, 1, 1)
+
+            texts[idx].particles = new THREE.Geometry()
+            texts[idx].points = THREE.GeometryUtils.randomPointsInGeometry(
+              texts[idx].geometry,
+              particleCount,
+            )
+
+            createVertices(texts[idx].particles, texts[idx].points)
+
+            enableTrigger(trigger, idx)
+          })
+        })
     
     for (var p = 0; p < particleCount; p++) {
         var vertex = new THREE.Vector3();
